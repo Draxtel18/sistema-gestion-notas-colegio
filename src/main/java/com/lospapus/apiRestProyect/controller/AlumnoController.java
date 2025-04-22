@@ -19,7 +19,7 @@ public class AlumnoController {
     }
 
     @PostMapping
-    public Alumno create(@RequestBody Alumno product) {
-        return alumnoService.save(product);
+    public Alumno create(@RequestBody Alumno alumno) {
+        return alumnoService.save(alumno);
     }
 }
