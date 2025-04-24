@@ -8,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -26,7 +27,7 @@ public class AlumnoControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
-    @InjectMocks
+    @MockBean
     private AlumnoService alumnoService;
 
     @Test
@@ -47,7 +48,7 @@ public class AlumnoControllerTests {
 
         mockMvc.perform(get("/api/alumnos"))
                 .andExpect(status().isOk())
-                .andDo(document("get-alumnos")); // << Documentación automática
+                .andDo(document("get-alumnos"));
     }
 
     @Test

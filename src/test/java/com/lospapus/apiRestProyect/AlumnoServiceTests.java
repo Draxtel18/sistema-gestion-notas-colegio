@@ -23,7 +23,7 @@ public class AlumnoServiceTests {
         Date fechaRegistro = new Date();
 
         Alumno alumno = new Alumno(
-                1,
+                2,
                 "Juan",
                 "Pérez",
                 fechaNacimiento,
@@ -36,9 +36,9 @@ public class AlumnoServiceTests {
         alumnoService.save(alumno);
 
         List<Alumno> resultado = alumnoService.findAll();
-        assertEquals(1, resultado.size());
-        assertEquals("Juan", resultado.get(0).getNombre());
-        assertEquals(alumno, resultado.get(0));
+        assertEquals(2, resultado.size());
+        assertEquals("Juan", resultado.get(1).getNombre());
+        assertEquals(alumno, resultado.get(1));
 
     }
 }

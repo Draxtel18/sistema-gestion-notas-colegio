@@ -20,7 +20,7 @@ public class CursoServiceTests {
     void testAddCurso() {
 
         Curso curso = new Curso(
-                1,
+                5,
                 "Aritmetica",
                 "2024",
                 "5to C"
@@ -28,9 +28,9 @@ public class CursoServiceTests {
         cursoService.save(curso);
 
         List<Curso> resultado = cursoService.findAll();
-        assertEquals(1, resultado.size());
-        assertEquals("Aritmetica", resultado.get(0).getNombre());
-        assertEquals(curso, resultado.get(0));
+        assertEquals(5, resultado.size());
+        assertEquals("Aritmetica", resultado.get(4).getNombre());
+        assertEquals(curso, resultado.get(4));
 
     }
 }
