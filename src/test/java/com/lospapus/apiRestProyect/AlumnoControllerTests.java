@@ -4,10 +4,10 @@ import com.lospapus.apiRestProyect.controller.AlumnoController;
 import com.lospapus.apiRestProyect.model.Alumno;
 import com.lospapus.apiRestProyect.service.AlumnoService;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -26,11 +26,11 @@ public class AlumnoControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @InjectMocks
     private AlumnoService alumnoService;
 
     @Test
-    void testGetCursos() throws Exception {
+    void testGetALumnos() throws Exception {
         Date fechaNacimiento = new Date();
         Date fechaRegistro = new Date();
 
