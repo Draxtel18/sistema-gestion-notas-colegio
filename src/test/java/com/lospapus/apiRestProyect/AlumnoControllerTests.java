@@ -14,8 +14,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
@@ -86,5 +88,47 @@ public class AlumnoControllerTests {
                                 """))
                 .andExpect(status().isOk())
                 .andDo(document("post-alumno"));
+    }
+
+    @Test
+    void  testGetAlumnoById() throws Exception {
+        Alumno alumno = new Alumno(1, "Asdy", "Valdivia", new Date(), "Av. Ignacio Merino", "9494970174", "asdy@hshd.com", new Date(), true);
+
+        when(alumnoService.getById(1)).thenReturn(Optional.of(alumno));
+
+        mockMvc.perform(get("/api/alumnos/1"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void testDeleteAlumno() throws Exception {
+        when(alumnoService.deleteById(1)).thenReturn(true);
+
+        mockMvc.perform(delete("/api/alumnos/1"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void testUpdateAlumno() throws Exception {
+        Alumno alumno = new Alumno(1, "Nuevo", "Nombre", new Date(), "Calle", "123456", "nuevo@mail.com", new Date(), true);
+
+        when(alumnoService.editById(eq(1), any(Alumno.class))).thenReturn(Optional.of(alumno));
+
+        mockMvc.perform(put("/api/alumnos/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                    {
+                        "id": 1,
+                        "nombre": "Josue",
+                        "apellido": "Palacios",
+                        "fechaNacimiento": "2000-01-01T00:00:00.000+00:00",
+                        "direccion": "Av. Oni wan",
+                        "telefono": "921821821",
+                        "email": "josue@gmail.com",
+                        "fechaRegistro": "2024-04-20T00:00:00.000+00:00",
+                        "activo": true
+                    }
+                """))
+                .andExpect(status().isOk());
     }
 }
