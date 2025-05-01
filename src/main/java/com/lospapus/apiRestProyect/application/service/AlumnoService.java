@@ -4,6 +4,7 @@ import com.lospapus.apiRestProyect.application.Exception.AlumnoNoEncontradoExcep
 import com.lospapus.apiRestProyect.application.Exception.EmailDuplicadoException;
 import com.lospapus.apiRestProyect.domain.model.Alumno;
 import com.lospapus.apiRestProyect.domain.repository.AlumnoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 public class AlumnoService{
     private final AlumnoRepository alumnoRepository;
 
+    @Autowired
     public AlumnoService(AlumnoRepository alumnoRepository){
         this.alumnoRepository = alumnoRepository;
     }
