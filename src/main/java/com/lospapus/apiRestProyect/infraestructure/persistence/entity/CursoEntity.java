@@ -13,7 +13,7 @@ import java.util.List;
 public class CursoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(nullable = false)
     private String name;
@@ -34,7 +34,7 @@ public class CursoEntity {
     @OneToMany(mappedBy = "cursoEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<NotaEntity> notaEntities = new ArrayList<>();
 
-    public CursoEntity(Long id, String name, String anioEscolar, String aula) {
+    public CursoEntity(int id, String name, String anioEscolar, String aula) {
         this.id = id;
         this.name = name;
         this.anioEscolar = anioEscolar;

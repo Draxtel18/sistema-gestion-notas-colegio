@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AlumnoDTO {
-    private Long id;
+    private int id;
     private String name;
     private String direccion;
     private String telefono;

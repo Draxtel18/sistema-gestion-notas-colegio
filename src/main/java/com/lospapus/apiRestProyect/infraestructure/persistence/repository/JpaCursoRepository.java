@@ -2,7 +2,7 @@ package com.lospapus.apiRestProyect.infraestructure.persistence.repository;
 
 import com.lospapus.apiRestProyect.domain.model.Curso;
 import com.lospapus.apiRestProyect.domain.repository.CursoRepository;
-import com.lospapus.apiRestProyect.infraestructure.Mapper.CursoMapper;
+import com.lospapus.apiRestProyect.application.Mapper.CursoMapper;
 import com.lospapus.apiRestProyect.infraestructure.persistence.entity.CursoEntity;
 import org.springframework.stereotype.Repository;
 
@@ -11,11 +11,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
-public class CursoRepositoryJPAImpl implements CursoRepository {
-    private final CursoRepositoryJPA cursoRepositoryJPA;
+public class JpaCursoRepository implements CursoRepository {
     private final CursoMapper cursoMapper;
+    private final SpringDataCursoRepository cursoRepositoryJPA;
 
-    public CursoRepositoryJPAImpl(CursoRepositoryJPA cursoRepositoryJPA, CursoMapper cursoMapper){
+
+    public JpaCursoRepository(SpringDataCursoRepository cursoRepositoryJPA, CursoMapper cursoMapper){
         this.cursoRepositoryJPA = cursoRepositoryJPA;
         this.cursoMapper = cursoMapper;
     }
@@ -27,7 +28,7 @@ public class CursoRepositoryJPAImpl implements CursoRepository {
     }
 
     @Override
-    public Optional<Curso> buscarCursoPorId(Long id) {
+    public Optional<Curso> buscarCursoPorId(int id) {
         return cursoRepositoryJPA.findById(id)
                 .map(cursoMapper::toDomain);
     }

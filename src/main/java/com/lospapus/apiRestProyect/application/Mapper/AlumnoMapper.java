@@ -1,9 +1,12 @@
-package com.lospapus.apiRestProyect.infraestructure.Mapper;
+package com.lospapus.apiRestProyect.application.Mapper;
 
 import com.lospapus.apiRestProyect.application.dto.AlumnoDTO;
 import com.lospapus.apiRestProyect.domain.model.Alumno;
 import com.lospapus.apiRestProyect.infraestructure.persistence.entity.AlumnoEntity;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Component
 public class AlumnoMapper {
@@ -38,6 +41,8 @@ public class AlumnoMapper {
         entity.setTelefono(alumno.getTelefono());
         entity.setEmail(alumno.getEmail());
         entity.setActive(alumno.isActive());
+        entity.setFechaNacimiento(alumno.getFechaNacimiento());
+        entity.setFechaRegistro(LocalDate.from(LocalDateTime.now()));
         return entity;
     }
 

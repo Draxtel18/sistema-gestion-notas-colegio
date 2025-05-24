@@ -15,14 +15,14 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Alumno {
-    private Long id;
+    private int id;
     private String name;
     private String direccion;
     private String telefono;
     private String email;
     private Date fechaNacimiento;
     private LocalDate fechaRegistro;
-    private boolean active = true;
+    private boolean active;
     private List<Inscripcion> inscripciones = new ArrayList<>();
     private List<Nota> notas = new ArrayList<>();
 
@@ -34,7 +34,7 @@ public class Alumno {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Alumno(Long id, String name, String direccion, String telefono, String email, Date fechaNacimiento, boolean active) {
+    public Alumno(int id, String name, String direccion, String telefono, String email, Date fechaNacimiento, boolean active) {
         this.id = id;
         this.name = name;
         this.direccion = direccion;
@@ -42,39 +42,6 @@ public class Alumno {
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
         this.active = active;
-    }
-
-    public void agregarInscripcion(Curso curso){
-        Inscripcion inscripcion = new Inscripcion(this,curso,LocalDate.now());
-        inscripciones.add(inscripcion);
-    }
-
-    public void retirarCurso(Curso curso){
-        inscripciones.removeIf(inscripcion -> inscripcion.getCurso().equals(curso));
-    }
-
-    public List<Curso> obtenerCursosInscritos(){
-        return inscripciones.stream()
-                .map(Inscripcion::getCurso)
-                .collect(Collectors.toList());
-    }
-
-    public Optional<Nota> obtenerNotasPorCurso(Curso curso){
-        return notas.stream()
-                .filter(nota -> nota.getCurso().equals(curso))
-                .findFirst();
-    }
-
-    public double calcularPromedioGeneral(){
-        if(notas.isEmpty()){
-            return 0.0;
-        }
-
-        double notaTotal = notas.stream()
-                .mapToDouble(Nota::getNotaValor)
-                .sum();
-
-        return  notaTotal / notas.size();
     }
 
     public void actualizarInformacionContacto(String direccion, String telefono, String email) {

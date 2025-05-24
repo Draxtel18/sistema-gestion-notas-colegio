@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface AlumnoRepository {
     Alumno save(Alumno alumno);
-    Optional<Alumno> findById(Long id);
+    Optional<Alumno> findById(int id);
     Optional<Alumno> findByEmail(String email);
     List<Alumno> findAll();
 }

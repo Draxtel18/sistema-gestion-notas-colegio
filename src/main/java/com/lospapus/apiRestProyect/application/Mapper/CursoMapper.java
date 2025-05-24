@@ -1,4 +1,4 @@
-package com.lospapus.apiRestProyect.infraestructure.Mapper;
+package com.lospapus.apiRestProyect.application.Mapper;
 
 import com.lospapus.apiRestProyect.application.dto.AlumnoDTO;
 import com.lospapus.apiRestProyect.application.dto.CursoDTO;

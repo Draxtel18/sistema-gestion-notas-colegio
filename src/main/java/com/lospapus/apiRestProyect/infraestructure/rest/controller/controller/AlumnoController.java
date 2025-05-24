@@ -2,7 +2,8 @@ package com.lospapus.apiRestProyect.infraestructure.rest.controller.controller;
 
 import com.lospapus.apiRestProyect.application.dto.AlumnoDTO;
 import com.lospapus.apiRestProyect.application.service.AlumnoService;
-import com.lospapus.apiRestProyect.infraestructure.Mapper.AlumnoMapper;
+import com.lospapus.apiRestProyect.application.Mapper.AlumnoMapper;
+import com.lospapus.apiRestProyect.infraestructure.persistence.entity.AlumnoEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class AlumnoController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<AlumnoDTO> obtenerPorId(@PathVariable Long id){
+    public ResponseEntity<AlumnoDTO> obtenerPorId(@PathVariable int id){
         return ResponseEntity.ok(
                 alumnoMapper.toDTO(
                         alumnoService.obtenerPorId(id)
@@ -47,6 +48,16 @@ public class AlumnoController {
                         alumnoService.registrarAlumno(alumnoMapper.toDomain(alumnoDTO))
                 ),
                 HttpStatus.CREATED
+        );
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<AlumnoDTO> retirarAlumno(@PathVariable int id){
+        return new ResponseEntity<>(
+                alumnoMapper.toDTO(
+                        alumnoService.retirarAlumno(id)
+                ),
+            HttpStatus.ACCEPTED
         );
     }
 }

@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface CursoRepository {
     Curso save(Curso curso);
-    Optional<Curso> buscarCursoPorId(Long id);
+    Optional<Curso> buscarCursoPorId(int id);
     List<Curso> findAll();
 }

@@ -19,7 +19,7 @@ public class CursoService {
         return cursoRepository.findAll();
     }
 
-    public Optional<Curso> buscarPorID(Long id){
+    public Optional<Curso> buscarPorID(int id){
         return cursoRepository.buscarCursoPorId(id);
     }
 

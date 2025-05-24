@@ -4,7 +4,7 @@ import com.lospapus.apiRestProyect.application.Exception.AlumnoNoEncontradoExcep
 import com.lospapus.apiRestProyect.application.Exception.EmailDuplicadoException;
 import com.lospapus.apiRestProyect.domain.model.Alumno;
 import com.lospapus.apiRestProyect.domain.repository.AlumnoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.lospapus.apiRestProyect.infraestructure.persistence.entity.AlumnoEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +13,6 @@ import java.util.List;
 public class AlumnoService{
     private final AlumnoRepository alumnoRepository;
 
-    @Autowired
     public AlumnoService(AlumnoRepository alumnoRepository){
         this.alumnoRepository = alumnoRepository;
     }
@@ -31,7 +30,7 @@ public class AlumnoService{
         return alumnoRepository.save(alumno);
     }
 
-    public Alumno actualizarAlumno(Long id, String direccion, String telefono, String email) {
+    public Alumno actualizarAlumno(int id, String direccion, String telefono, String email) {
         Alumno alumno = alumnoRepository.findById(id)
                 .orElseThrow(()-> new AlumnoNoEncontradoException("Alumno no encontrado con ID: " + id));
         if (alumno == null) {
@@ -50,18 +49,18 @@ public class AlumnoService{
         return alumno;
     }
 
-    public void desactivarAlumno(Long id) {
+    public Alumno retirarAlumno(int id) {
         Alumno alumno = alumnoRepository.findById(id)
                 .orElseThrow(()-> new AlumnoNoEncontradoException("Alumno no encontrado con ID: " + id));
         alumno.desactivar();
-        alumnoRepository.save(alumno);
+        return alumnoRepository.save(alumno);
     }
 
     public List<Alumno> listarTodosLosAlumnos() {
         return alumnoRepository.findAll();
     }
 
-    public Alumno obtenerPorId(Long id){
+    public Alumno obtenerPorId(int id){
         return alumnoRepository.findById(id)
                 .orElseThrow(()-> new AlumnoNoEncontradoException("Alumno no encontrado con ID: " + id));
     }

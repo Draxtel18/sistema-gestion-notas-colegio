@@ -14,7 +14,7 @@ import java.util.List;
 public class AlumnoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(nullable = false)
     private String name;
@@ -42,7 +42,7 @@ public class AlumnoEntity {
     @OneToMany(mappedBy = "alumnoEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<NotaEntity> notaEntities = new ArrayList<>();
 
-    public AlumnoEntity(Long id, String name, String direccion, String telefono, String email, Date fechaNacimiento, LocalDate fechaRegistro, boolean active) {
+    public AlumnoEntity(int id, String name, String direccion, String telefono, String email, Date fechaNacimiento, LocalDate fechaRegistro, boolean active) {
         this.id = id;
         this.name = name;
         this.direccion = direccion;

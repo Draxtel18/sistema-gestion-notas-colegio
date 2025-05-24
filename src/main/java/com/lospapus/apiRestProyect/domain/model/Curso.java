@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Curso {
-    private Long id;
+    private int id;
     private String name;
     private String anioEscolar;
     private String aula;
@@ -21,7 +21,7 @@ public class Curso {
     private List<Inscripcion> inscripciones = new ArrayList<>();
     private List<Nota> notas = new ArrayList<>();
 
-    public Curso(Long id, String name, String anioEscolar, String aula) {
+    public Curso(int id, String name, String anioEscolar, String aula) {
         this.id = id;
         this.name = name;
         this.anioEscolar = anioEscolar;
