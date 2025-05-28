@@ -1,17 +1,28 @@
 package com.lospapus.apiRestProyect.model;
 
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
+@Entity
+@Table(name = "cursos")
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
 public class Curso {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String nombre;
     private String anoEscolar;
     private String aula;
+
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Nota> notas;
 
     public Curso(int id, String nombre, String anoEscolar, String aula) {
         this.id = id;
@@ -50,5 +61,13 @@ public class Curso {
 
     public void setAula(String aula) {
         this.aula = aula;
+    }
+
+    public List<Nota> getNotas() {
+        return notas;
+    }
+
+    public void setNotas(List<Nota> notas) {
+        this.notas = notas;
     }
 }

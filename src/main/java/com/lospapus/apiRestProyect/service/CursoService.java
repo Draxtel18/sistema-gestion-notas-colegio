@@ -1,29 +1,36 @@
 package com.lospapus.apiRestProyect.service;
 
 import com.lospapus.apiRestProyect.model.Curso;
+import com.lospapus.apiRestProyect.repository.CursoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CursoService {
-    public List<Curso> cursoList = new ArrayList<>(
-            List.of(
-                    new Curso(1,"Aritmetica","2025", "5toC"),
-                    new Curso(2, "Razonamiento Verbal", "2025", "4toB"),
-                    new Curso(3, "Algebra", "2025", "4toC"),
-                    new Curso(4, "Historia universal", "2025","5toB")
-            )
-    );
+
+    private final CursoRepository cursoRepository;
+
+    @Autowired
+    public CursoService(CursoRepository cursoRepository) {
+        this.cursoRepository = cursoRepository;
+    }
 
     public List<Curso> findAll() {
-        return cursoList;
+        return cursoRepository.findAll();
     }
 
     public Curso save(Curso curso) {
-        cursoList.add(curso);
-        return curso;
+        return cursoRepository.save(curso);
+    }
+
+    public Optional<Curso> findById(int id) {
+        return cursoRepository.findById(id);
+    }
+
+    public void deleteById(int id) {
+        cursoRepository.deleteById(id);
     }
 }

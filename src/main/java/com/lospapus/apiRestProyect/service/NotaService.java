@@ -2,6 +2,7 @@ package com.lospapus.apiRestProyect.service;
 
 import com.lospapus.apiRestProyect.model.Nota;
 import com.lospapus.apiRestProyect.repository.NotaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,5 +31,13 @@ public class NotaService {
 
     public void eliminar(Long id) {
         notaRepository.deleteById(id);
+    }
+
+    // Método con control de transacción
+    @Transactional
+    public void guardarNotasEnLote(List<Nota> notas) {
+        for (Nota nota : notas) {
+            notaRepository.save(nota);
+        }
     }
 }
