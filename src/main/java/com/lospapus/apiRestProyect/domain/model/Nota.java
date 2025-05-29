@@ -1,53 +1,60 @@
 package com.lospapus.apiRestProyect.domain.model;
 
+import com.lospapus.apiRestProyect.infraestructure.persistence.entity.AsignacionesEntity;
+import com.lospapus.apiRestProyect.infraestructure.persistence.entity.UsuarioEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Nota {
-    private Long id;
-    private Alumno alumno;
-    private Curso curso;
-    private Double notaValor;
-    private String comentarios;
-    private LocalDate fechaNota;
+    private Integer id;
+    private Usuario alumno;
+    private Asignaciones asignaciones;
+    private Double calificacion;
+    private String comentario;
+    private LocalDate fechaRegistroNota;
 
-    public Nota(Alumno alumno, Curso curso, Double notaValor, String comentarios, LocalDate fechaNota) {
-        this.alumno = alumno;
-        this.curso = curso;
-        this.notaValor = notaValor;
-        this.comentarios = comentarios;
-        this.fechaNota = fechaNota;
-    }
-
-    public Nota(Alumno alumno, Curso curso, Double notaValor, LocalDate fechaNota) {
-        this.alumno = alumno;
-        this.curso = curso;
-        this.notaValor = notaValor;
-        this.fechaNota = fechaNota;
-    }
-
-    public void actualizarNota(double nuevaNota, String nuevoComentario) {
-        validarNota(nuevaNota);
-        this.notaValor = nuevaNota;
-        this.comentarios = nuevoComentario;
-    }
-
-    public void añadirComentario(String comentario) {
-        if (this.comentarios == null) {
-            this.comentarios = comentario;
-        } else {
-            this.comentarios += "\n" + comentario;
+    public Nota(Integer id, Usuario alumno, Asignaciones asignaciones, Double calificacion, String comentario, LocalDate fechaRegistroNota) {
+        validarCalificacion(calificacion);
+        if (alumno == null || !alumno.esAlumno()) {
+            throw new IllegalArgumentException("La nota debe ser asignada a un alumno válido.");
         }
+        if (asignaciones == null) {
+            throw new IllegalArgumentException("La nota debe estar asociada a una asignación de enseñanza válida.");
+        }
+        this.fechaRegistroNota = fechaRegistroNota;
+        this.comentario = comentario;
+        this.calificacion = calificacion;
+        this.asignaciones = asignaciones;
+        this.alumno = alumno;
+        this.id = id;
     }
 
-    private void validarNota(double nota) {
-        if (nota < 0.0 || nota > 20.0) {
+    public Nota(Usuario alumno, Asignaciones asignaciones, Double calificacion, String comentario, LocalDate fechaRegistroNota) {
+        validarCalificacion(calificacion);
+        this.alumno = alumno;
+        this.asignaciones = asignaciones;
+        this.calificacion = calificacion;
+        this.comentario = comentario;
+        this.fechaRegistroNota = fechaRegistroNota;
+    }
+
+    public void actualizarNota(double nuevaCalificacion, String nuevoComentario) {
+        validarCalificacion(nuevaCalificacion);
+        this.calificacion = nuevaCalificacion;
+        this.comentario = nuevoComentario;
+    }
+
+    private void validarCalificacion(double calificacion) {
+        if (calificacion < 0.0 || calificacion > 20.0) {
             throw new IllegalArgumentException("La nota debe estar entre 0 y 20.");
         }
     }

@@ -9,8 +9,9 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
-public class NotaEntity {
+public class InscripcionesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -20,15 +21,10 @@ public class NotaEntity {
     private UsuarioEntity alumno;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_profesor_asignatura_curso", nullable = false)
-    private AsignacionesEntity asignacionesEntity;
+    @JoinColumn(name = "id_curso", nullable = false)
+    private CursoEntity cursoEntity;
 
-    @Column(name = "calificacion", nullable = false)
-    private Double calificacion;
+    @Column(name = "fecha_inscripcion", nullable = false)
+    private LocalDate fechaInscripcion;
 
-    @Column(name = "comentario", nullable = true)
-    private String comentario;
-
-    @Column(name = "fecha_registro_nota", nullable = false)
-    private LocalDate fechaRegistroNota;
 }

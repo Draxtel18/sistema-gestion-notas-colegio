@@ -1,31 +1,47 @@
 package com.lospapus.apiRestProyect.application.Mapper;
 
-import com.lospapus.apiRestProyect.application.dto.AlumnoDTO;
-import com.lospapus.apiRestProyect.application.dto.CursoDTO;
-import com.lospapus.apiRestProyect.domain.model.Alumno;
+import com.lospapus.apiRestProyect.application.dto.*;
+import com.lospapus.apiRestProyect.domain.model.Asignatura;
 import com.lospapus.apiRestProyect.domain.model.Curso;
-import com.lospapus.apiRestProyect.infraestructure.persistence.entity.AlumnoEntity;
+import com.lospapus.apiRestProyect.domain.model.Usuario;
+import com.lospapus.apiRestProyect.infraestructure.persistence.entity.AsignaturaEntity;
 import com.lospapus.apiRestProyect.infraestructure.persistence.entity.CursoEntity;
-import org.springframework.stereotype.Component;
 
-@Component
 public class CursoMapper {
+    public static Curso toDomain(CursoEntity cursoEntity) {
 
-    public CursoEntity toEntity(Curso curso) {
-        CursoEntity entity = new CursoEntity();
-        entity.setId(curso.getId());
-        entity.setName(curso.getName());
-        entity.setAula(curso.getAula());
-        entity.setAnioEscolar(curso.getAnioEscolar());
-        return entity;
-    }
-
-    public Curso toDomain(CursoEntity entity) {
         return new Curso(
-                entity.getId(),
-                entity.getName(),
-                entity.getAnioEscolar(),
-                entity.getAula()
+                cursoEntity.getId(),
+                cursoEntity.getNombreAula(),
+                cursoEntity.getAnioEscolar()
         );
     }
+
+    public static CursoEntity toEntity(Curso cursoDomain) {
+        CursoEntity cursoEntity = new CursoEntity();
+        cursoEntity.setId(cursoDomain.getId());
+        cursoEntity.setNombreAula(cursoDomain.getNombreAula());
+        cursoEntity.setAnioEscolar(cursoDomain.getAnioEscolar());
+        return cursoEntity;
+    }
+
+    // Mapea de Modelo de Dominio a DTO de Respuesta
+    public static CursoResponseDTO toCursoResponseDTO(Curso cursoDomain) {
+        return new CursoResponseDTO(
+                cursoDomain.getId(),
+                cursoDomain.getNombreAula(),
+                cursoDomain.getAnioEscolar()
+        );
+    }
+
+    // Mapea de DTO de Solicitud (Creación) a Modelo de Dominio
+    public static Curso toDomain(CrearCursoRequestDTO requestDTO) {
+
+        return new Curso(
+                null,
+                requestDTO.getNombreCurso(),
+                requestDTO.getAnioAcademico()
+        );
+    }
+
 }
