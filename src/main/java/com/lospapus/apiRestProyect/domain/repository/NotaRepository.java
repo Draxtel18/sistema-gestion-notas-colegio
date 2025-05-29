@@ -9,5 +9,8 @@ public interface NotaRepository {
     Optional<Nota> buscarPorId(int id);
     Nota guardar(Nota nota);
     List<Nota> buscarTodos();
-    List<Nota> buscarPorAlumnoId(int idAlumno);
+    List<Nota> buscarNotasPorCurso(String nombreCurso);
+    List<Nota> buscarNotasPorAlumno(int alumnoId);
+    List<Nota> buscarNotasPorProfesor(int profesorId);
+
 }

@@ -46,20 +46,6 @@ public class NotaService {
                 .buscarPorId(requestDTO.getIdAsignacion())
                 .orElseThrow(() -> new RuntimeException("Asignación Profesor-Asignatura-Curso no encontrada con ID: " + requestDTO.getIdAsignacion()));
 
-        // --- Paso 2: Aplicar las restricciones de negocio ---
-        // Aquí es donde un PROFESOR solo puede ver/asignar notas a SUS alumnos por curso.
-        // Asume que el ID del profesor logueado se obtiene del contexto de seguridad (Spring Security).
-        // Long idProfesorLogueado = SecurityContextHolder.getContext().getAuthentication().getPrincipal().getId(); // Ejemplo
-
-        // if (!asignaciones.getProfesor().getId().equals(idProfesorLogueado)) {
-        //     throw new SecurityException("El profesor no tiene permiso para asignar notas en esta asignación.");
-        // }
-        // if (!asignaciones.getCurso().equals(alumno.getCursoAlQuePertenece())) { // Requiere que el alumno tenga un curso principal
-        //    // Lógica para verificar que el alumno pertenece al curso de la asignación
-        //    // Esto podría implicar buscar en AlumnoCursoRepository
-        // }
-
-
         Nota nuevaNotaDomain = new Nota(
                 alumno,
                 asignaciones,
@@ -80,7 +66,7 @@ public class NotaService {
         //     throw new SecurityException("El alumno solo puede ver sus propias notas.");
         // }
 
-        List<Nota> notasDomain = notaRepository.buscarPorAlumnoId(idAlumno);
+        List<Nota> notasDomain = notaRepository.buscarNotasPorAlumno(idAlumno);
 
         return notasDomain.stream()
                 .map(aplicacionMapper::toNotaResponseDTO)

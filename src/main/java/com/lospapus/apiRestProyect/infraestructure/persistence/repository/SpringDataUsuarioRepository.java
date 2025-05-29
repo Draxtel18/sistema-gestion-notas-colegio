@@ -11,7 +11,10 @@ import java.util.Optional;
 @Repository
 public interface SpringDataUsuarioRepository extends JpaRepository<UsuarioEntity, Integer>{
     Optional<UsuarioEntity> findById(int id);
+
     Optional<UsuarioEntity> findByEmail(String email);
+
     Optional<UsuarioEntity> findByDni(String dni);
+
     List<UsuarioEntity> findByRolEntity(RolEntity rol);
 }

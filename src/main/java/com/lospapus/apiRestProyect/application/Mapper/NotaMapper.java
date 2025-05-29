@@ -99,15 +99,4 @@ public class NotaMapper {
         );
     }
 
-    // Necesitarás mappers de aplicación similares para Curso, Asignatura, AlumnoCurso, ProfesorAsignaturaCurso
-    // para los casos de respuesta. Por ejemplo:
-    /*
-    class AsignaturaAplicacionMapperManual {
-        public static AsignaturaResponseDTO toAsignaturaResponseDTO(Asignatura domain) { ... }
-    }
-    class CursoAplicacionMapperManual {
-        public static CursoResponseDTO toCursoResponseDTO(Curso domain) { ... }
-    }
-    // etc.
-    */
 }

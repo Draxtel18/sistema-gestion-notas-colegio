@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface SpringDataCursoRepository extends JpaRepository<CursoEntity, Integer> {
     List<CursoEntity> findAll();
+
 }

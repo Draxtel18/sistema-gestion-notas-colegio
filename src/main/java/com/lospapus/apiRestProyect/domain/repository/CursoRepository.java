@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface CursoRepository {
     List<Curso> findAll();
+    Curso save(Curso curso);
 }

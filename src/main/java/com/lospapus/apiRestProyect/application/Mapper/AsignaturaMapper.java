@@ -4,8 +4,10 @@ import com.lospapus.apiRestProyect.application.dto.*;
 import com.lospapus.apiRestProyect.domain.model.Asignatura;
 import com.lospapus.apiRestProyect.domain.model.Curso;
 import com.lospapus.apiRestProyect.domain.model.Rol;
+import com.lospapus.apiRestProyect.domain.model.Usuario;
 import com.lospapus.apiRestProyect.infraestructure.persistence.entity.AsignaturaEntity;
 import com.lospapus.apiRestProyect.infraestructure.persistence.entity.RolEntity;
+import com.lospapus.apiRestProyect.infraestructure.persistence.entity.UsuarioEntity;
 
 public class AsignaturaMapper {
     public static Asignatura toDomain(AsignaturaEntity asignaturaEntity) {
@@ -39,5 +41,9 @@ public class AsignaturaMapper {
                 null,
                 requestDTO.getNombreAsignatura()
         );
+    }
+
+    public static void updateEntityFromDomain(Asignatura asignaturaDomain, AsignaturaEntity asignaturaEntity) {
+        asignaturaEntity.setNombreAsignatura(asignaturaDomain.getNombreAsignatura());
     }
 }

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface AsignaturaRepository {
     List<Asignatura> findAll();
+    Asignatura save(Asignatura asignatura);
 }

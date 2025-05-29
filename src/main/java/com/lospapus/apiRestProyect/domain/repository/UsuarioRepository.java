@@ -11,7 +11,6 @@ public interface UsuarioRepository {
     Usuario save(Usuario usuario);
     Optional<Usuario> findById(int id);
     Optional<Usuario> findByEmail(String email);
-    Optional<Usuario> findByDni(String dni);
     List<Usuario> findAll();
     List<Usuario> findByRol(Rol rol);
 }

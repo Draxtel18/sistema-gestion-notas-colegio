@@ -44,4 +44,9 @@ public class CursoMapper {
         );
     }
 
+    public static void updateEntityFromDomain(Curso cursoDomain, CursoEntity cursoEntity) {
+        cursoEntity.setNombreAula(cursoDomain.getNombreAula());
+        cursoEntity.setAnioEscolar(cursoDomain.getAnioEscolar());
+    }
+
 }

@@ -10,6 +10,7 @@ import com.lospapus.apiRestProyect.domain.model.Usuario;
 import com.lospapus.apiRestProyect.domain.repository.RolRepository;
 import com.lospapus.apiRestProyect.domain.repository.UsuarioRepository;
 import com.sun.tools.jconsole.JConsoleContext;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class UsuarioService {
                 .collect(Collectors.toList());
     }
 
-
+    @Transactional
     public UsuarioResponseDTO registrarUsuario( CrearUsuarioRequestDTO requestDTO) {
         Rol rol = rolRepository.findByRol(requestDTO.getNombreRol())
                 .orElseThrow(() -> new RuntimeException("Rol no encontrado: " + requestDTO.getNombreRol()));

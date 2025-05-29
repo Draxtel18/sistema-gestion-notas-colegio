@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class Asignaciones {
-    private int id;
+    private Integer id;
     private Usuario profesor;
     private Asignatura asignatura;
     private Curso curso;

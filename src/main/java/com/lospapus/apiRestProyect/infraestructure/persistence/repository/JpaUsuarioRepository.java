@@ -55,11 +55,6 @@ public class JpaUsuarioRepository implements UsuarioRepository {
                 .map(UsuarioMapper::toDomain);
     }
 
-    @Override
-    public Optional<Usuario> findByDni(String dni) {
-        return usuarioRepository.findByDni(dni)
-                .map(UsuarioMapper::toDomain);
-    }
 
     @Override
     public List<Usuario> findAll() {
