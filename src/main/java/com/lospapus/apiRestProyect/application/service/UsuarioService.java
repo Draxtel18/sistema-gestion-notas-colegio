@@ -1,22 +1,20 @@
 package com.lospapus.apiRestProyect.application.service;
 
 import com.lospapus.apiRestProyect.application.Mapper.AplicacionMapper;
-import com.lospapus.apiRestProyect.application.Mapper.UsuarioMapper;
+import com.lospapus.apiRestProyect.application.dto.ActualizarUsuarioRequestDTO;
 import com.lospapus.apiRestProyect.application.dto.CrearUsuarioRequestDTO;
 import com.lospapus.apiRestProyect.application.dto.UsuarioResponseDTO;
-import com.lospapus.apiRestProyect.domain.model.Nota;
 import com.lospapus.apiRestProyect.domain.model.Rol;
 import com.lospapus.apiRestProyect.domain.model.Usuario;
 import com.lospapus.apiRestProyect.domain.repository.RolRepository;
 import com.lospapus.apiRestProyect.domain.repository.UsuarioRepository;
-import com.sun.tools.jconsole.JConsoleContext;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,6 +37,35 @@ public class UsuarioService {
         return usuariosDomain.stream()
                 .map(mapper::toUsuarioResponseDTO)
                 .collect(Collectors.toList());
+    }
+
+    public Optional<UsuarioResponseDTO> obtenerPorId(int id){
+        return usuarioRepository.findById(id)
+                .map(mapper::toUsuarioResponseDTO);
+    }
+
+    public Optional<UsuarioResponseDTO> obtenerPorIdIgual(int id){
+        return usuarioRepository.findById(id)
+                .map(mapper::toUsuarioResponseDTO);
+    }
+
+    public String getEmailUsuario(int id){
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
+        return usuario.get().getEmail();
+    }
+
+    @Transactional
+    public UsuarioResponseDTO actualizarUsuario(int id, ActualizarUsuarioRequestDTO requestDTO) {
+        Usuario usuarioExistente = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
+
+        usuarioExistente.setName(requestDTO.getName());
+        usuarioExistente.setDireccion(requestDTO.getDireccion());
+        usuarioExistente.setTelefono(requestDTO.getTelefono());
+        usuarioExistente.setEmail(requestDTO.getEmail());
+
+        Usuario usuarioActualizadoDomain = usuarioRepository.save(usuarioExistente);
+        return mapper.toUsuarioResponseDTO(usuarioActualizadoDomain);
     }
 
     @Transactional

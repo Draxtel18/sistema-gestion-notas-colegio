@@ -72,6 +72,8 @@ public class JpaUsuarioRepository implements UsuarioRepository {
                 .collect(Collectors.toList());
     }
 
+
+
     public boolean existsByEmail(String email) {
         return usuarioRepository.findByEmail(email).isEmpty();
     }

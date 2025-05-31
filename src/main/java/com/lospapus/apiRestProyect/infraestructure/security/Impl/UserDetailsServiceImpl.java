@@ -3,6 +3,7 @@ package com.lospapus.apiRestProyect.infraestructure.security.Impl;
 import com.lospapus.apiRestProyect.domain.model.Usuario;
 import com.lospapus.apiRestProyect.domain.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -36,7 +37,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return new User(usuario.getEmail(),
                 usuario.getPassword(),
                 usuario.getRol() != null ?
-                        Collections.singletonList(new org.springframework.security.core.authority.SimpleGrantedAuthority(usuario.getRol().getNombreRol())) :
+                        Collections.singletonList(
+                                new SimpleGrantedAuthority("ROLE_" + usuario.getRol().getNombreRol())
+                        ) :
                         Collections.emptyList());
 
     }

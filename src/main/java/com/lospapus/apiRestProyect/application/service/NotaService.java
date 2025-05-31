@@ -60,12 +60,6 @@ public class NotaService {
     }
 
     public List<NotaResponseDTO> obtenerNotasDeAlumno(int idAlumno) {
-        // Restricción: Un alumno solo puede ver sus propias notas.
-        // Long idAlumnoLogueado = SecurityContextHolder.getContext().getAuthentication().getPrincipal().getId();
-        // if (!idAlumno.equals(idAlumnoLogueado)) {
-        //     throw new SecurityException("El alumno solo puede ver sus propias notas.");
-        // }
-
         List<Nota> notasDomain = notaRepository.buscarNotasPorAlumno(idAlumno);
 
         return notasDomain.stream()

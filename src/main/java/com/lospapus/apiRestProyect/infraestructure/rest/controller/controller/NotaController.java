@@ -33,7 +33,7 @@ public class NotaController {
         return ResponseEntity.ok(allNotas);
     }
 
-    // Otros endpoints (obtener notas de un alumno, etc.)
+
     @GetMapping("/{idAlumno}")
     public ResponseEntity<List<NotaResponseDTO>> obtenerNotasPorAlumno(@PathVariable int idAlumno) {
         List<NotaResponseDTO> notas = notaService.obtenerNotasDeAlumno(idAlumno);
