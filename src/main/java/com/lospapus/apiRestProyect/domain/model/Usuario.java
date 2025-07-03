@@ -80,41 +80,6 @@ public class Usuario {
 
     }
 
-
-    public void actualizarInformacionContacto(String direccion, String telefono, String email) {
-        if (email != null && !email.isEmpty()) {
-            validarEmail(email);
-            this.email = email;
-        }
-        if (telefono != null && !telefono.isEmpty()) {
-            validarTelefono(telefono);
-            this.telefono = telefono;
-        }
-        if (direccion != null) {
-            this.direccion = direccion;
-        }
-    }
-
-    public void desactivar() {
-        this.active = false;
-    }
-
-    public void reactivar() {
-        this.active = true;
-    }
-
-    private void validarEmail(String email) {
-        if (email == null || !email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
-            throw new IllegalArgumentException("El correo no tiene un formato válido");
-        }
-    }
-
-    private void validarTelefono(String telefono) {
-        if (telefono == null || !telefono.matches("^\\d{9}$")) {
-            throw new IllegalArgumentException("El teléfono debe contener 9 digitos");
-        }
-    }
-
     public boolean esAdministrador() {
         return this.rol != null && this.rol.esAdministrador();
     }

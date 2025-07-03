@@ -9,7 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ActualizarUsuarioRequestDTO {
-    // ID no incluido aquí; se pasaría en el path de la URL (ej. PUT /usuarios/{id})
 
     @NotBlank(message = "El nombre no puede estar vacío")
     private String name;

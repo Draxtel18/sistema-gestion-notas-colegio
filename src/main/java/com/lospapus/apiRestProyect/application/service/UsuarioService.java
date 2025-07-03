@@ -44,14 +44,20 @@ public class UsuarioService {
                 .map(mapper::toUsuarioResponseDTO);
     }
 
-    public Optional<UsuarioResponseDTO> obtenerPorIdIgual(int id){
-        return usuarioRepository.findById(id)
-                .map(mapper::toUsuarioResponseDTO);
-    }
-
-    public String getEmailUsuario(int id){
+    public String obtenerEmailUsuario(int id){
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         return usuario.get().getEmail();
+    }
+
+    public UsuarioResponseDTO deshabilitarUsuario(int id){
+        Usuario usuarioPorDeshabilitar = usuarioRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException(("Usuario no encontrado con ID: " + id)));
+
+        usuarioPorDeshabilitar.setActive(false);
+
+        Usuario usuarioDeshabilitadoDomain = usuarioRepository.save(usuarioPorDeshabilitar);
+
+        return mapper.toUsuarioResponseDTO(usuarioDeshabilitadoDomain);
     }
 
     @Transactional
@@ -62,7 +68,10 @@ public class UsuarioService {
         usuarioExistente.setName(requestDTO.getName());
         usuarioExistente.setDireccion(requestDTO.getDireccion());
         usuarioExistente.setTelefono(requestDTO.getTelefono());
-        usuarioExistente.setEmail(requestDTO.getEmail());
+        if(!requestDTO.getEmail().equals(usuarioExistente.getEmail())){
+            usuarioExistente.setEmail(requestDTO.getEmail());
+        }
+
 
         Usuario usuarioActualizadoDomain = usuarioRepository.save(usuarioExistente);
         return mapper.toUsuarioResponseDTO(usuarioActualizadoDomain);
