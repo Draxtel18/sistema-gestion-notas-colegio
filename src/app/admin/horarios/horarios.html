@@ -1,0 +1,24 @@
+
+<section>
+  <h2>Gestión de Horarios</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Curso</th>
+        <th>Día</th>
+        <th>Hora</th>
+        <th>Aula</th>
+        <th>Profesor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let horario of horarios">
+        <td>{{ horario.curso }}</td>
+        <td>{{ horario.dia }}</td>
+        <td>{{ horario.hora }}</td>
+        <td>{{ horario.aula }}</td>
+        <td>{{ horario.profesor }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

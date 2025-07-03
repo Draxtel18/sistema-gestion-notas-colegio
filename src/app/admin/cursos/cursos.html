@@ -1,0 +1,25 @@
+<section>
+  <h2>Gestión de Cursos</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Código</th>
+        <th>Créditos</th>
+        <th>Profesor</th>
+        <th>Aula</th>
+        <th>Horario</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let curso of cursos">
+        <td>{{ curso.nombre }}</td>
+        <td>{{ curso.codigo }}</td>
+        <td>{{ curso.creditos }}</td>
+        <td>{{ curso.profesor }}</td>
+        <td>{{ curso.aula }}</td>
+        <td>{{ curso.horario }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

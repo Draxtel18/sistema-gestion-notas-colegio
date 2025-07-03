@@ -1,0 +1,47 @@
+<section class="dashboard">
+  <h2>Panel de Administración</h2>
+
+  <div class="resumen">
+    <div class="card" *ngFor="let item of resumen">
+      <div class="icon">{{ item.icon }}</div>
+      <p>{{ item.label }}</p>
+      <h3>{{ item.valor }}</h3>
+      <span>{{ item.sub }}</span>
+    </div>
+  </div>
+
+  <div class="paneles">
+    <div class="acciones">
+      <h3>Acciones Rápidas</h3>
+      <p>Gestiona el sistema educativo</p>
+      <div class="grid">
+        <div class="box usuarios">
+          <div class="icon">👥</div>
+          Gestionar Usuarios<br><small>Alumnos y profesores</small>
+        </div>
+        <div class="box cursos">
+          <div class="icon">📘</div>
+          Gestionar Cursos<br><small>Crear y editar cursos</small>
+        </div>
+        <div class="box horarios">
+          <div class="icon">🗓️</div>
+          Asignar Horarios<br><small>Programar clases</small>
+        </div>
+        <div class="box delegados">
+          <div class="icon">🧑‍🏫</div>
+          Gestionar Delegados<br><small>Asignar delegados</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="actividad">
+      <h3>Actividad Reciente</h3>
+      <p>Últimas acciones en el sistema</p>
+      <ul>
+        <li *ngFor="let act of accionesRecientes" [ngClass]="act.color">
+          <strong>{{ act.titulo }}</strong><br><small>{{ act.descripcion }}</small>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

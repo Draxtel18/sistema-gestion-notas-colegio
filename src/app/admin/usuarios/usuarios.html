@@ -1,0 +1,94 @@
+<section class="usuarios-admin">
+  <div class="encabezado">
+    <h2>Gestión de Usuarios</h2>
+   <button class="btn-nuevo" (click)="abrirModal()">
+  <span>+</span> Nuevo Usuario
+</button>
+  </div>
+
+  <div class="card">
+    <h3 class="titulo-lista">Lista de Usuarios</h3>
+    <div class="tabla-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Cursos</th>
+            <th>Delegado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of usuarios; let i = index">
+            <td>{{ u.nombre }}</td>
+            <td>{{ u.email }}</td>
+            <td>
+              <span class="badge gris">{{ u.cursos }} cursos</span>
+            </td>
+            <td>
+              <span *ngIf="u.esDelegado" class="badge negro">Delegado</span>
+            </td>
+           <td class="acciones">
+  <button class="icono editar" title="Editar" (click)="editarUsuario(i)">
+    ✏️
+  </button>
+  <button class="icono eliminar" title="Eliminar" (click)="eliminarUsuario(i)">
+    🗑️
+  </button>
+</td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+<!-- Modal dinámico -->
+<div class="modal-overlay" *ngIf="mostrarModal">
+  <div class="modal">
+    <h3>{{ modoEdicion ? 'Editar Usuario' : 'Nuevo Usuario' }}</h3>
+
+    <!-- Selector de tipo de usuario -->
+    <label for="tipo">Tipo de Usuario</label>
+    <select id="tipo" [(ngModel)]="usuarioActual.tipo" name="tipo">
+      <option value="alumno">Alumno</option>
+      <option value="profesor">Profesor</option>
+    </select>
+
+    <!-- Formulario común -->
+    <form (ngSubmit)="guardarUsuario()" class="formulario-modal">
+      <label>Nombre</label>
+      <input type="text" [(ngModel)]="usuarioActual.nombre" name="nombre" required />
+
+      <label>Email</label>
+      <input type="email" [(ngModel)]="usuarioActual.email" name="email" required />
+
+      <!-- Si es Alumno -->
+      <ng-container *ngIf="usuarioActual.tipo === 'alumno'">
+        <label>N° de cursos</label>
+        <input type="number" [(ngModel)]="usuarioActual.cursos" name="cursos" required min="0" />
+
+        <label>
+          <input type="checkbox" [(ngModel)]="usuarioActual.esDelegado" name="delegado" />
+          ¿Es delegado?
+        </label>
+      </ng-container>
+
+      <!-- Si es Profesor -->
+      <ng-container *ngIf="usuarioActual.tipo === 'profesor'">
+        <label>Especialidad</label>
+        <input type="text" [(ngModel)]="usuarioActual.especialidad" name="especialidad" required />
+      </ng-container>
+
+      <!-- Botones -->
+      <div class="acciones-modal">
+        <button type="submit" class="btn-guardar">Guardar</button>
+        <button type="button" class="btn-cancelar" (click)="cerrarModal()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+

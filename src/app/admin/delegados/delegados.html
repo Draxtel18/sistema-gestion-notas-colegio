@@ -1,0 +1,23 @@
+<section>
+  <h2>Gestión de Delegados</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Curso</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Teléfono</th>
+        <th>Sección</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let delegado of delegados">
+        <td>{{ delegado.curso }}</td>
+        <td>{{ delegado.nombre }}</td>
+        <td>{{ delegado.correo }}</td>
+        <td>{{ delegado.telefono }}</td>
+        <td>{{ delegado.seccion }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

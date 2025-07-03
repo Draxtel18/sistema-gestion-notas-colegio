@@ -1,0 +1,148 @@
+.dashboard {
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+
+  h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #111827;
+  }
+
+  .resumen {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    .card {
+      flex: 1;
+      min-width: 200px;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+      }
+
+      .icon {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        font-weight: 600;
+        color: #374151;
+      }
+
+      h3 {
+        font-size: 1.7rem;
+        margin: 0.5rem 0;
+        color: #111827;
+      }
+
+      span {
+        font-size: 0.9rem;
+        color: #6b7280;
+      }
+    }
+  }
+
+  .paneles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+
+    .acciones, .actividad {
+      flex: 1;
+      min-width: 300px;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+
+      h3 {
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+        color: #111827;
+      }
+
+      p {
+        color: #6b7280;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+
+        .box {
+          background: #f9fafb;
+          padding: 1rem;
+          border-radius: 8px;
+          font-weight: 600;
+          font-size: 0.95rem;
+          transition: all 0.3s;
+          border-left: 4px solid transparent;
+          cursor: pointer;
+
+          .icon {
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+          }
+
+          &:hover {
+            background-color: #f3f4f6;
+            transform: translateY(-2px);
+          }
+
+          small {
+            display: block;
+            font-weight: normal;
+            color: #4b5563;
+            margin-top: 0.3rem;
+          }
+
+          &.usuarios { border-left-color: #3b82f6; }
+          &.cursos { border-left-color: #10b981; }
+          &.horarios { border-left-color: #8b5cf6; }
+          &.delegados { border-left-color: #f97316; }
+        }
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          padding: 0.6rem 0;
+          border-bottom: 1px solid #e5e7eb;
+
+          strong {
+            color: #111827;
+          }
+
+          small {
+            color: #6b7280;
+          }
+
+          &.verde { color: #16a34a; }
+          &.azul { color: #2563eb; }
+          &.morado { color: #7c3aed; }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .resumen, .paneles {
+      flex-direction: column;
+    }
+  }
+}
