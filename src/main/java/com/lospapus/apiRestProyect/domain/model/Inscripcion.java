@@ -26,4 +26,7 @@ public class Inscripcion {
         this.curso = curso;
         this.fechaInscripcion = fechaInscripcion;
     }
+
+    public Inscripcion(Usuario alumno, @NotNull(message = "El ID del alumno no puede ser nulo") int idAlumno, @NotNull(message = "El ID del curso no puede ser nulo") int idCurso) {
+    }
 }
