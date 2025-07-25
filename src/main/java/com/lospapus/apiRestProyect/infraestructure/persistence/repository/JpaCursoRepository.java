@@ -2,6 +2,7 @@ package com.lospapus.apiRestProyect.infraestructure.persistence.repository;
 
 import com.lospapus.apiRestProyect.application.Mapper.AsignaturaMapper;
 import com.lospapus.apiRestProyect.application.Mapper.CursoMapper;
+import com.lospapus.apiRestProyect.application.Mapper.UsuarioMapper;
 import com.lospapus.apiRestProyect.domain.model.Asignatura;
 import com.lospapus.apiRestProyect.domain.model.Curso;
 import com.lospapus.apiRestProyect.domain.repository.CursoRepository;
@@ -42,5 +43,11 @@ public class JpaCursoRepository implements CursoRepository {
 
         CursoEntity savedEntity = cursoRepository.save(cursoEntity);
         return CursoMapper.toDomain(savedEntity);
+    }
+
+    @Override
+    public Optional<Curso> findById(int id) {
+        return cursoRepository.findById(id)
+                .map(CursoMapper::toDomain);
     }
 }

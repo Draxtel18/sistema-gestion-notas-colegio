@@ -41,4 +41,12 @@ public class AplicacionMapper {
         return CursoMapper.toDomain(requestDTO);
     }
 
+
+    //Mapeo para Inscripcion
+    public InscripcionResponseDTO toInscripcionResponseDTO(Inscripcion inscripcionDomain){
+        return InscripcionMapper.toInscripcionResponseDTO(inscripcionDomain);
+    }
+    public Inscripcion toDomain(InscripcionRequestDTO requestDTO){
+        return InscripcionMapper.toDomain(requestDTO);
+    }
 }

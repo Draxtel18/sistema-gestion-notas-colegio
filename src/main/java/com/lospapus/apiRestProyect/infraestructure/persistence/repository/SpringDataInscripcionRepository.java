@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface SpringDataInscripcionRepository extends JpaRepository<InscripcionesEntity, Integer> {
-    List<InscripcionesEntity> findAll();
+public interface SpringDataInscripcionRepository extends JpaRepository<InscripcionEntity, Integer> {
+    List<InscripcionEntity> findByAlumnoId(int id);
 
-    Optional<InscripcionesEntity> findById(int id);
+    Optional<InscripcionEntity> findByAlumnoIdAndCursoEntityId(int alumnoId, int cursoId);
 
-    @Query("SELECT n FROM InscripcionesEntity n WHERE n.cursoEntity.nombreAula = :nombreAula")
+    @Query("SELECT n FROM InscripcionEntity n WHERE n.cursoEntity.nombreAula = :nombreAula")
     List<NotaEntity> obtenerInscripcionesPorCurso(@Param("nombreAula") String nombreAula);
 
-    @Query("SELECT n FROM InscripcionesEntity n WHERE n.alumno.dni = :nombreAula")
+    @Query("SELECT n FROM InscripcionEntity n WHERE n.alumno.dni = :nombreAula")
     List<AsignacionesEntity> obtenerInscripcionesPorAlumno(@Param("nombreAula") String dni);
 }

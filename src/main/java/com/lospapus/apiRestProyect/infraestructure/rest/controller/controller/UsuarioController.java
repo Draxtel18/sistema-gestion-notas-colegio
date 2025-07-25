@@ -2,8 +2,10 @@ package com.lospapus.apiRestProyect.infraestructure.rest.controller.controller;
 
 import com.lospapus.apiRestProyect.application.dto.ActualizarUsuarioRequestDTO;
 import com.lospapus.apiRestProyect.application.dto.CrearUsuarioRequestDTO;
+import com.lospapus.apiRestProyect.application.dto.CursoResponseDTO;
 import com.lospapus.apiRestProyect.application.dto.UsuarioResponseDTO;
 import com.lospapus.apiRestProyect.application.service.UsuarioService;
+import com.lospapus.apiRestProyect.domain.model.Usuario;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +49,7 @@ public class UsuarioController {
         Optional<UsuarioResponseDTO> usuario = usuarioService.obtenerPorId(id);
         return ResponseEntity.ok(usuario);
     }
+
 
     //Poder actualizar alumno
     @PutMapping("/{id}")
